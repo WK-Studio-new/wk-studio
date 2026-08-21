@@ -67,6 +67,16 @@
         font-weight: 300;
       }
 
+      body:not(.js-ready) .reveal,
+      body:not(.js-ready) .hero-label,
+      body:not(.js-ready) h1,
+      body:not(.js-ready) .hero-sub,
+      body:not(.js-ready) .hero-btns,
+      body:not(.js-ready) .hero-stats {
+        opacity: 1;
+        transform: none;
+      }
+
       a {
         color: inherit;
         text-decoration: none;
@@ -368,6 +378,7 @@
       .hero-sub,
       .hero-btns,
       .hero-stats {
+        opacity: 1;
         animation-duration: 0.65s;
       }
 
@@ -376,7 +387,7 @@
         flex-wrap: wrap;
         gap: 14px;
         margin-bottom: 80px;
-        opacity: 0;
+        opacity: 1;
         animation: fadeUp 0.9s 0.65s cubic-bezier(0.16, 1, 0.3, 1) forwards;
       }
 
@@ -428,7 +439,7 @@
         flex-wrap: wrap;
         padding-top: 48px;
         border-top: 1px solid var(--line);
-        opacity: 0;
+        opacity: 1;
         animation: fadeUp 0.9s 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
       }
 
@@ -598,6 +609,18 @@
         gap: 1px;
         background: var(--line);
         border: 1px solid var(--line);
+      }
+
+      .serv-support {
+        margin-top: 24px;
+        color: var(--muted);
+        font-size: 13px;
+        line-height: 1.8;
+      }
+
+      .serv-support strong {
+        color: var(--white);
+        font-weight: 500;
       }
 
       @media (max-width: 900px) {
@@ -2210,7 +2233,7 @@
 
       @keyframes fadeUp {
         from {
-          opacity: 0;
+          opacity: 1;
           transform: translateY(24px);
         }
 
@@ -2372,6 +2395,11 @@
           crescer no digital, em um só lugar.
         </p>
         <div class="serv-grid reveal" id="serv-grid"></div>
+        <p class="serv-support reveal">
+          <strong>Também disponíveis:</strong> edição de imagens, plataformas de
+          gerenciamento, notificações via WhatsApp, produção de conteúdo e
+          cardápios digitais.
+        </p>
       </div>
     </section>
 
@@ -3187,6 +3215,7 @@
     </div>
 
     <script>
+      document.body.classList.add("js-ready");
       const WA = "5577999684834";
 
       /* ── NAV SCROLL ── */
@@ -3504,10 +3533,20 @@
 
       function buildCards() {
         const g = document.getElementById("serv-grid");
-        services.forEach((s, i) => {
-          const c = document.createElement("div");
-          c.className = "serv-card";
-          c.innerHTML = `
+        const featuredServices = [
+          "Sites",
+          "Google Meu Negócio",
+          "Identidade Visual",
+          "WhatsApp Business",
+          "Instagram Profissional",
+          "Agendamento Online",
+        ];
+        services
+          .filter((s) => featuredServices.includes(s.name))
+          .forEach((s, i) => {
+            const c = document.createElement("div");
+            c.className = "serv-card";
+            c.innerHTML = `
       <div class="serv-num">0${i + 1}</div>
       <div class="serv-icon">${s.icon}</div>
       <div class="serv-name">${s.name}</div>
@@ -3516,8 +3555,8 @@
       <ul class="serv-bullets">${s.bullets.map((b) => `<li>${b}</li>`).join("")}</ul>
       <button class="btn-ver" onclick="openModal(${i})">Solicitar orçamento</button>
     `;
-          g.appendChild(c);
-        });
+            g.appendChild(c);
+          });
       }
 
       function openModal(i) {
