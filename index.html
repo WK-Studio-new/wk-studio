@@ -50,8 +50,8 @@
         --gold-dim: rgba(201, 168, 76, 0.15);
         --gold-mid: rgba(201, 168, 76, 0.35);
         --white: #f5f0e8;
-        --muted: rgba(245, 240, 232, 0.45);
-        --dim: rgba(245, 240, 232, 0.2);
+        --muted: rgba(245, 240, 232, 0.64);
+        --dim: rgba(245, 240, 232, 0.32);
         --line: rgba(201, 168, 76, 0.15);
         --ff-title: "Cormorant Garamond", Georgia, serif;
         --ff-body: "DM Sans", system-ui, sans-serif;
@@ -214,9 +214,68 @@
         color: var(--bg);
       }
 
+      .nav-menu-toggle {
+        display: none;
+        width: 42px;
+        height: 42px;
+        border: 1px solid var(--gold-mid);
+        background: transparent;
+        color: var(--gold);
+        cursor: pointer;
+      }
+
+      .nav-menu-toggle span {
+        display: block;
+        width: 18px;
+        height: 1px;
+        margin: 4px auto;
+        background: currentColor;
+        transition:
+          transform 0.25s,
+          opacity 0.25s;
+      }
+
+      .mobile-menu {
+        display: none;
+      }
+
       @media (max-width: 800px) {
         .nav-links {
           display: none;
+        }
+
+        .nav-cta {
+          display: none;
+        }
+
+        .nav-menu-toggle {
+          display: block;
+        }
+
+        .mobile-menu.open {
+          display: flex;
+          position: absolute;
+          top: 68px;
+          left: 24px;
+          right: 24px;
+          flex-direction: column;
+          padding: 12px 20px;
+          background: rgba(17, 17, 17, 0.98);
+          border: 1px solid var(--line);
+          box-shadow: 0 18px 40px rgba(0, 0, 0, 0.35);
+        }
+
+        .mobile-menu a {
+          padding: 14px 0;
+          border-bottom: 1px solid var(--line);
+          color: var(--muted);
+          font-size: 12px;
+          letter-spacing: 0.12em;
+          text-transform: uppercase;
+        }
+
+        .mobile-menu a:last-child {
+          border-bottom: none;
         }
       }
 
@@ -224,6 +283,10 @@
    HERO
 ══════════════════════════════════════════════════ */
       #hero {
+        padding: 0;
+      }
+
+      .hero-inner {
         padding: 180px 40px 140px;
         max-width: var(--max);
         margin: 0 auto;
@@ -231,8 +294,8 @@
       }
 
       @media (max-width: 600px) {
-        #hero {
-          padding: 140px 24px 100px;
+        .hero-inner {
+          padding: 132px 24px 88px;
         }
       }
 
@@ -298,6 +361,14 @@
         margin-bottom: 52px;
         opacity: 0;
         animation: fadeUp 0.9s 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      }
+
+      .hero-label,
+      h1,
+      .hero-sub,
+      .hero-btns,
+      .hero-stats {
+        animation-duration: 0.65s;
       }
 
       .hero-btns {
@@ -388,6 +459,12 @@
 ══════════════════════════════════════════════════ */
       section {
         padding: 120px 0;
+      }
+
+      @media (max-width: 600px) {
+        section {
+          padding: 80px 0;
+        }
       }
 
       .s-label {
@@ -772,6 +849,18 @@
 
       .proj-img-wrap {
         overflow: hidden;
+        background: var(--bg3);
+        min-height: 240px;
+        display: grid;
+        place-items: center;
+      }
+
+      .proj-img-fallback::after {
+        content: "Prévia do projeto";
+        color: var(--gold);
+        font-size: 11px;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
       }
 
       .proj-body {
@@ -1348,13 +1437,23 @@
         align-items: center;
         justify-content: space-between;
         gap: 20px;
+        width: 100%;
         padding: 22px 0;
         cursor: pointer;
         font-size: 15px;
         font-weight: 300;
         color: var(--muted);
+        text-align: left;
+        font-family: var(--ff-body);
+        background: transparent;
+        border: 0;
         user-select: none;
         transition: color 0.25s;
+      }
+
+      .faq-q:focus-visible {
+        outline: 1px solid var(--gold);
+        outline-offset: 6px;
       }
 
       .faq-q:hover {
@@ -1420,6 +1519,17 @@
       .faq-item.open .faq-a {
         max-height: 300px;
         padding-bottom: 22px;
+      }
+
+      @media (max-width: 600px) {
+        .faq-q {
+          font-size: 14px;
+          padding: 18px 0;
+        }
+
+        .faq-a {
+          font-size: 13px;
+        }
       }
 
       /* ══════════════════════════════════════════════════
@@ -1511,6 +1621,11 @@
       .calc-opt:hover {
         background: var(--bg3);
         color: var(--white);
+      }
+
+      .calc-opt:focus-visible {
+        outline: 1px solid var(--gold);
+        outline-offset: -3px;
       }
 
       .calc-opt.selected {
@@ -1675,6 +1790,34 @@
 
       .calc-restart:hover {
         color: var(--muted);
+      }
+
+      @media (max-width: 600px) {
+        .calc-wrap {
+          padding: 28px 20px;
+        }
+
+        .calc-q {
+          font-size: 22px;
+        }
+
+        .calc-opt {
+          align-items: flex-start;
+          padding: 15px 16px;
+        }
+
+        .calc-nav,
+        .calc-result-btns {
+          flex-direction: column;
+        }
+
+        .calc-btn-back,
+        .calc-btn-next,
+        .calc-result-btns a {
+          width: 100%;
+          justify-content: center;
+          text-align: center;
+        }
       }
 
       /* ══════════════════════════════════════════════════
@@ -2076,6 +2219,20 @@
           transform: translateY(0);
         }
       }
+
+      @media (prefers-reduced-motion: reduce) {
+        html {
+          scroll-behavior: auto;
+        }
+
+        *,
+        *::before,
+        *::after {
+          animation-duration: 0.01ms !important;
+          animation-iteration-count: 1 !important;
+          transition-duration: 0.01ms !important;
+        }
+      }
     </style>
   </head>
 
@@ -2095,16 +2252,31 @@
           class="nav-cta"
           href="https://wa.me/5577999684834?text=Olá!+Vim+pelo+site+e+quero+saber+mais+sobre+os+planos+da+WK+Studio."
           target="_blank"
+          rel="noopener noreferrer"
           >Fale conosco</a
         >
+        <button
+          class="nav-menu-toggle"
+          type="button"
+          aria-label="Abrir menu"
+          aria-expanded="false"
+          aria-controls="mobile-menu"
+        >
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+      <div class="mobile-menu" id="mobile-menu">
+        <a href="#contexto">Por que digital</a>
+        <a href="#servicos">Soluções</a>
+        <a href="#projetos">Projetos</a>
+        <a href="#calculadora">Plano ideal</a>
+        <a href="#faq">FAQ</a>
       </div>
     </nav>
 
     <!-- ══ HERO ══ -->
     <section id="hero" style="padding: 0">
-      <div
-        style="padding: 180px 40px 140px; max-width: var(--max); margin: 0 auto"
-      >
+      <div class="hero-inner">
         <div class="hero-label">Agência digital para negócios locais</div>
         <h1>
           Do Google ao WhatsApp:<br />presença digital completa<br />para
@@ -2120,6 +2292,7 @@
             class="btn-solid"
             href="https://wa.me/5577999684834?text=Olá!+Quero+saber+mais+sobre+os+planos+da+WK+Studio."
             target="_blank"
+            rel="noopener noreferrer"
             >Falar no WhatsApp</a
           >
           <a class="btn-outline" href="#servicos">Ver soluções</a>
@@ -2266,6 +2439,10 @@
                 src="https://wk-studioooo.vercel.app/mg-automecanica-card.jpg"
                 alt="Site MG Automecânica"
                 loading="lazy"
+                onerror="
+                  this.parentElement.classList.add('proj-img-fallback');
+                  this.remove();
+                "
               />
             </div>
             <div class="proj-body">
@@ -2291,6 +2468,7 @@
                 class="btn-proj"
                 href="https://mg-automecanicaa.vercel.app/"
                 target="_blank"
+                rel="noopener noreferrer"
                 >Ver projeto</a
               >
             </div>
@@ -2302,6 +2480,10 @@
                 src="https://wk-studioooo.vercel.app/doce-sabor-card.jpg"
                 alt="Site Doce Sabor"
                 loading="lazy"
+                onerror="
+                  this.parentElement.classList.add('proj-img-fallback');
+                  this.remove();
+                "
               />
             </div>
             <div class="proj-body">
@@ -2327,6 +2509,7 @@
                 class="btn-proj"
                 href="https://doce-sabor-gamma.vercel.app/"
                 target="_blank"
+                rel="noopener noreferrer"
                 >Ver projeto</a
               >
             </div>
@@ -2346,9 +2529,9 @@
             <div class="s-label">Quem está por trás</div>
             <h2>Oi, sou o <em>Welky</em></h2>
             <p>
-              Crio sites e presença digital para negócios locais na Bahia.
-              Atendo cada cliente pessoalmente — sem terceirizar, sem bot, sem
-              papo de grande agência.
+              Crio sites e presença digital para negócios locais em todo o
+              Brasil. Atendo cada cliente pessoalmente — sem terceirizar, sem
+              bot, sem papo de grande agência.
             </p>
             <p>
               Comecei a WK Studio porque vi que muitos negócios incríveis
@@ -2361,7 +2544,7 @@
               prazo — é comigo.
             </p>
             <div class="sobre-badges">
-              <span class="sobre-badge">📍 Bahia</span>
+              <span class="sobre-badge">🌎 Brasil inteiro</span>
               <span class="sobre-badge">⚡ Entrega em 7 dias</span>
               <span class="sobre-badge">💬 Atendimento direto</span>
               <span class="sobre-badge">🔒 Suporte incluso</span>
@@ -2392,7 +2575,9 @@
               <div class="dep-avatar">🔧</div>
               <div>
                 <div class="dep-name">MG Automecânica</div>
-                <div class="dep-role">Oficina mecânica — Bahia</div>
+                <div class="dep-role">
+                  Oficina mecânica — atendimento online
+                </div>
               </div>
             </div>
           </div>
@@ -2408,7 +2593,7 @@
               <div class="dep-avatar">🍓</div>
               <div>
                 <div class="dep-name">Doce Sabor</div>
-                <div class="dep-role">Geleias artesanais — Bahia</div>
+                <div class="dep-role">Geleias artesanais — e-commerce</div>
               </div>
             </div>
           </div>
@@ -2467,6 +2652,7 @@
               style="justify-content: center; width: 100%; display: flex"
               href="https://wa.me/5577999684834?text=Olá!+Quero+saber+mais+sobre+o+plano+de+manutenção."
               target="_blank"
+              rel="noopener noreferrer"
               >Solicitar orçamento</a
             >
           </div>
@@ -2503,7 +2689,7 @@
                 Preencha abaixo ou chame direto no WhatsApp.
               </div>
               <div class="form-group">
-                <label class="form-label">Seu nome</label>
+                <label class="form-label" for="f-nome">Seu nome</label>
                 <input
                   class="form-input"
                   id="f-nome"
@@ -2512,7 +2698,7 @@
                 />
               </div>
               <div class="form-group">
-                <label class="form-label">WhatsApp</label>
+                <label class="form-label" for="f-tel">WhatsApp</label>
                 <input
                   class="form-input"
                   id="f-tel"
@@ -2521,7 +2707,7 @@
                 />
               </div>
               <div class="form-group">
-                <label class="form-label">Tipo de negócio</label>
+                <label class="form-label" for="f-tipo">Tipo de negócio</label>
                 <select class="form-select" id="f-tipo">
                   <option value="">Selecione...</option>
                   <option>Restaurante / Lanchonete</option>
@@ -2534,14 +2720,16 @@
                 </select>
               </div>
               <div class="form-group">
-                <label class="form-label">O que você precisa? (opcional)</label>
+                <label class="form-label" for="f-msg"
+                  >O que você precisa? (opcional)</label
+                >
                 <textarea
                   class="form-textarea"
                   id="f-msg"
                   placeholder="Ex: quero um site e aparecer no Google..."
                 ></textarea>
               </div>
-              <button class="form-btn" onclick="enviarWA()">
+              <button class="form-btn" type="button" onclick="enviarWA()">
                 Enviar mensagem →
               </button>
               <div class="form-note">
@@ -2552,6 +2740,7 @@
               class="whatsapp-direct"
               href="https://wa.me/5577999684834?text=Olá!+Vim+pelo+site+e+quero+saber+mais+sobre+as+soluções+da+WK+Studio."
               target="_blank"
+              rel="noopener noreferrer"
             >
               <div class="wa-icon">💬</div>
               <div class="wa-text">
@@ -2576,11 +2765,17 @@
         </p>
         <div class="faq-list reveal">
           <div class="faq-item">
-            <div class="faq-q" onclick="toggleFaq(this)">
+            <button
+              class="faq-q"
+              type="button"
+              aria-expanded="false"
+              aria-controls="faq-a-1"
+              onclick="toggleFaq(this)"
+            >
               Quanto tempo leva para ficar pronto?
               <div class="faq-icon"></div>
-            </div>
-            <div class="faq-a">
+            </button>
+            <div class="faq-a" id="faq-a-1">
               Sites são entregues em 7 dias úteis após a aprovação do briefing.
               Google Meu Negócio leva em média 3 dias. Identidade visual de 5 a
               7 dias. Projetos do plano Premium podem levar até 15 dias por
@@ -2589,11 +2784,17 @@
             </div>
           </div>
           <div class="faq-item">
-            <div class="faq-q" onclick="toggleFaq(this)">
+            <button
+              class="faq-q"
+              type="button"
+              aria-expanded="false"
+              aria-controls="faq-a-2"
+              onclick="toggleFaq(this)"
+            >
               Como funciona o pagamento?
               <div class="faq-icon"></div>
-            </div>
-            <div class="faq-a">
+            </button>
+            <div class="faq-a" id="faq-a-2">
               Pagamento único por projeto, sem mensalidade obrigatória.
               Aceitamos Pix, cartão de crédito (parcelado) e transferência
               bancária. Geralmente é 50% no início e 50% na entrega, mas isso é
@@ -2602,11 +2803,17 @@
             </div>
           </div>
           <div class="faq-item">
-            <div class="faq-q" onclick="toggleFaq(this)">
+            <button
+              class="faq-q"
+              type="button"
+              aria-expanded="false"
+              aria-controls="faq-a-3"
+              onclick="toggleFaq(this)"
+            >
               E se eu não gostar do resultado?
               <div class="faq-icon"></div>
-            </div>
-            <div class="faq-a">
+            </button>
+            <div class="faq-a" id="faq-a-3">
               Durante o desenvolvimento você acompanha e aprova cada etapa — não
               entregamos nada sem sua aprovação. Incluímos até 2 rodadas de
               ajustes no prazo sem custo extra. Se depois da entrega surgir algo
@@ -2614,11 +2821,17 @@
             </div>
           </div>
           <div class="faq-item">
-            <div class="faq-q" onclick="toggleFaq(this)">
+            <button
+              class="faq-q"
+              type="button"
+              aria-expanded="false"
+              aria-controls="faq-a-4"
+              onclick="toggleFaq(this)"
+            >
               Você atende fora da Bahia?
               <div class="faq-icon"></div>
-            </div>
-            <div class="faq-a">
+            </button>
+            <div class="faq-a" id="faq-a-4">
               Sim! Atendo clientes em todo o Brasil. Como trabalhamos 100%
               online, a distância não é obstáculo. O processo todo acontece pelo
               WhatsApp e as reuniões são por videochamada se necessário. Já
@@ -2626,11 +2839,17 @@
             </div>
           </div>
           <div class="faq-item">
-            <div class="faq-q" onclick="toggleFaq(this)">
+            <button
+              class="faq-q"
+              type="button"
+              aria-expanded="false"
+              aria-controls="faq-a-5"
+              onclick="toggleFaq(this)"
+            >
               Preciso entender de tecnologia para usar o site?
               <div class="faq-icon"></div>
-            </div>
-            <div class="faq-a">
+            </button>
+            <div class="faq-a" id="faq-a-5">
               Não. Entregamos tudo configurado e pronto para usar. Além disso,
               fazemos um treinamento rápido pelo WhatsApp mostrando como
               atualizar textos, fotos e informações básicas. E durante os 30
@@ -2639,11 +2858,17 @@
             </div>
           </div>
           <div class="faq-item">
-            <div class="faq-q" onclick="toggleFaq(this)">
+            <button
+              class="faq-q"
+              type="button"
+              aria-expanded="false"
+              aria-controls="faq-a-6"
+              onclick="toggleFaq(this)"
+            >
               O site vai aparecer no Google automaticamente?
               <div class="faq-icon"></div>
-            </div>
-            <div class="faq-a">
+            </button>
+            <div class="faq-a" id="faq-a-6">
               Todos os sites que fazemos já saem configurados com SEO básico —
               isso acelera muito o processo de indexação. Para buscas locais
               (Google Maps), o Google Meu Negócio configurado faz toda a
@@ -2652,11 +2877,17 @@
             </div>
           </div>
           <div class="faq-item">
-            <div class="faq-q" onclick="toggleFaq(this)">
+            <button
+              class="faq-q"
+              type="button"
+              aria-expanded="false"
+              aria-controls="faq-a-7"
+              onclick="toggleFaq(this)"
+            >
               Qual plano é ideal para mim?
               <div class="faq-icon"></div>
-            </div>
-            <div class="faq-a">
+            </button>
+            <div class="faq-a" id="faq-a-7">
               Depende do estágio do seu negócio. Se está começando do zero ou
               precisa de algo rápido e funcional, o Essencial resolve. Se quer
               uma presença completa e profissional, o Profissional é o mais
@@ -2666,11 +2897,17 @@
             </div>
           </div>
           <div class="faq-item">
-            <div class="faq-q" onclick="toggleFaq(this)">
+            <button
+              class="faq-q"
+              type="button"
+              aria-expanded="false"
+              aria-controls="faq-a-8"
+              onclick="toggleFaq(this)"
+            >
               O que acontece depois da entrega?
               <div class="faq-icon"></div>
-            </div>
-            <div class="faq-a">
+            </button>
+            <div class="faq-a" id="faq-a-8">
               Você fica com 30 dias de suporte grátis para tirar dúvidas e pedir
               pequenos ajustes. Depois disso, há o plano de manutenção mensal
               para quem quiser que a gente continue cuidando de tudo —
@@ -2728,6 +2965,7 @@
             <div class="calc-nav">
               <button
                 class="calc-btn-next"
+                type="button"
                 id="next-1"
                 disabled
                 onclick="goStep(2)"
@@ -2761,11 +2999,12 @@
               </div>
             </div>
             <div class="calc-nav">
-              <button class="calc-btn-back" onclick="goStep(1)">
+              <button class="calc-btn-back" type="button" onclick="goStep(1)">
                 ← Voltar
               </button>
               <button
                 class="calc-btn-next"
+                type="button"
                 id="next-2"
                 disabled
                 onclick="goStep(3)"
@@ -2802,11 +3041,12 @@
               </div>
             </div>
             <div class="calc-nav">
-              <button class="calc-btn-back" onclick="goStep(2)">
+              <button class="calc-btn-back" type="button" onclick="goStep(2)">
                 ← Voltar
               </button>
               <button
                 class="calc-btn-next"
+                type="button"
                 id="next-3"
                 disabled
                 onclick="showResult()"
@@ -2845,8 +3085,8 @@
           <div>
             <div class="footer-brand-name">WK<em>Studio</em></div>
             <p class="footer-brand-desc">
-              Soluções digitais completas para negócios locais na Bahia. Sites,
-              Google, Instagram e WhatsApp integrados para você crescer.
+              Soluções digitais completas para negócios locais em todo o Brasil.
+              Sites, Google, Instagram e WhatsApp integrados para você crescer.
             </p>
           </div>
           <div>
@@ -2864,17 +3104,23 @@
           <div>
             <div class="footer-col-title">Contato</div>
             <div class="footer-links">
-              <a href="https://wa.me/5577999684834" target="_blank"
+              <a
+                href="https://wa.me/5577999684834"
+                target="_blank"
+                rel="noopener noreferrer"
                 >(77) 99968-4834</a
               >
               <a href="mailto:wk.oliveira24@gmail.com"
                 >wk.oliveira24@gmail.com</a
               >
-              <a href="https://instagram.com/wk_studio.br" target="_blank"
+              <a
+                href="https://instagram.com/wk_studio.br"
+                target="_blank"
+                rel="noopener noreferrer"
                 >@wk_studio.br</a
               >
               <a href="#" style="color: var(--dim); cursor: default"
-                >Bahia, Brasil</a
+                >Atendimento online em todo o Brasil</a
               >
             </div>
           </div>
@@ -2891,7 +3137,14 @@
     <!-- ══ MODAL ══ -->
     <div class="modal-overlay" id="overlay" onclick="closeModal(event)">
       <div class="modal">
-        <button class="modal-close" onclick="closeModalBtn()">✕</button>
+        <button
+          class="modal-close"
+          type="button"
+          aria-label="Fechar janela"
+          onclick="closeModalBtn()"
+        >
+          ✕
+        </button>
         <div class="modal-icon" id="m-icon"></div>
         <div class="modal-name" id="m-name"></div>
         <div class="modal-tagline" id="m-tagline"></div>
@@ -2900,7 +3153,12 @@
         <ul class="modal-included" id="m-included"></ul>
         <div class="modal-section-title">Detalhes</div>
         <div class="modal-meta" id="m-meta"></div>
-        <a id="m-cta" class="modal-cta" href="#" target="_blank"
+        <a
+          id="m-cta"
+          class="modal-cta"
+          href="#"
+          target="_blank"
+          rel="noopener noreferrer"
           >Falar sobre este serviço no WhatsApp →</a
         >
       </div>
@@ -2915,6 +3173,8 @@
       <a
         href="https://wa.me/5577999684834?text=Olá!+Vim+pelo+site+da+WK+Studio+e+quero+saber+mais."
         target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Falar com a WK Studio pelo WhatsApp"
       >
         <div class="wa-float-bubble">
           <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -2931,6 +3191,28 @@
 
       /* ── NAV SCROLL ── */
       const nav = document.getElementById("main-nav");
+      const menuToggle = document.querySelector(".nav-menu-toggle");
+      const mobileMenu = document.getElementById("mobile-menu");
+
+      function closeMobileMenu() {
+        mobileMenu.classList.remove("open");
+        menuToggle.setAttribute("aria-expanded", "false");
+        menuToggle.setAttribute("aria-label", "Abrir menu");
+      }
+
+      menuToggle.addEventListener("click", () => {
+        const isOpen = mobileMenu.classList.toggle("open");
+        menuToggle.setAttribute("aria-expanded", String(isOpen));
+        menuToggle.setAttribute(
+          "aria-label",
+          isOpen ? "Fechar menu" : "Abrir menu",
+        );
+      });
+
+      mobileMenu.querySelectorAll("a").forEach((link) => {
+        link.addEventListener("click", closeMobileMenu);
+      });
+
       window.addEventListener(
         "scroll",
         () => {
@@ -2953,6 +3235,15 @@
         { threshold: 0.08, rootMargin: "0px 0px -40px 0px" },
       );
       revealEls.forEach((el) => observer.observe(el));
+
+      const solutionsSection = document.getElementById("servicos");
+      const calculatorSection = document.getElementById("calculadora");
+      if (solutionsSection && calculatorSection) {
+        solutionsSection.parentNode.insertBefore(
+          calculatorSection,
+          solutionsSection.nextElementSibling,
+        );
+      }
 
       /* ── SERVICES DATA ── */
       const services = [
@@ -3277,14 +3568,29 @@
 
       buildCards();
 
+      document.querySelectorAll(".calc-opt").forEach((option) => {
+        option.setAttribute("role", "button");
+        option.setAttribute("tabindex", "0");
+        option.addEventListener("keydown", (event) => {
+          if (event.key === "Enter" || event.key === " ") {
+            event.preventDefault();
+            option.click();
+          }
+        });
+      });
+
       /* ── FAQ ── */
       function toggleFaq(el) {
         const item = el.parentElement;
         const isOpen = item.classList.contains("open");
-        document
-          .querySelectorAll(".faq-item.open")
-          .forEach((i) => i.classList.remove("open"));
-        if (!isOpen) item.classList.add("open");
+        document.querySelectorAll(".faq-item.open").forEach((i) => {
+          i.classList.remove("open");
+          i.querySelector(".faq-q").setAttribute("aria-expanded", "false");
+        });
+        if (!isOpen) {
+          item.classList.add("open");
+          el.setAttribute("aria-expanded", "true");
+        }
       }
 
       /* ── CALCULATOR ── */
