@@ -3573,25 +3573,79 @@
 
       function buildCards() {
         const g = document.getElementById("serv-grid");
-        services.forEach((s, i) => {
+        const serviceGroups = [
+          {
+            icon: "🌐",
+            name: "Site profissional",
+            tagline: "Sua empresa na internet do jeito certo",
+            indexes: [0],
+          },
+          {
+            icon: "📍",
+            name: "Google Meu Negócio",
+            tagline: "Seja encontrado por quem está perto",
+            indexes: [1],
+          },
+          {
+            icon: "🎨",
+            name: "Marca e conteúdo visual",
+            tagline: "Uma imagem consistente e profissional",
+            indexes: [2, 3, 9],
+          },
+          {
+            icon: "💬",
+            name: "WhatsApp e automação",
+            tagline: "Atendimento organizado e mais eficiente",
+            indexes: [4, 8],
+          },
+          {
+            icon: "📱",
+            name: "Instagram profissional",
+            tagline: "Presença constante e conteúdo que engaja",
+            indexes: [5],
+          },
+          {
+            icon: "⚙️",
+            name: "Gestão do negócio",
+            tagline: "Clientes, estoque e operação em um só lugar",
+            indexes: [6],
+          },
+          {
+            icon: "📅",
+            name: "Agendamento online",
+            tagline: "Seus clientes agendam a qualquer hora",
+            indexes: [7],
+          },
+          {
+            icon: "🍽️",
+            name: "Cardápios digitais",
+            tagline: "Seu cardápio sempre acessível e atualizado",
+            indexes: [10],
+          },
+        ];
+
+        serviceGroups.forEach((group, i) => {
+          const groupedServices = group.indexes.map((index) => services[index]);
           const c = document.createElement("div");
           c.className = "serv-card";
           c.innerHTML = `
       <button class="serv-summary" type="button" aria-expanded="false" aria-controls="serv-details-${i}" onclick="toggleService(this)">
         <span class="serv-num">0${i + 1}</span>
-        <span class="serv-icon">${s.icon}</span>
-        <span class="serv-name">${s.name}</span>
-        <span class="serv-tag">${s.tagline}</span>
+        <span class="serv-icon">${group.icon}</span>
+        <span class="serv-name">${group.name}</span>
+        <span class="serv-tag">${group.tagline}</span>
         <span class="serv-expand" aria-hidden="true">+</span>
       </button>
       <div class="serv-details" id="serv-details-${i}" hidden>
-        <p class="serv-desc">${s.desc}</p>
-        <ul class="serv-bullets">${s.bullets.map((b) => `<li>${b}</li>`).join("")}</ul>
-        <button class="btn-ver" type="button" onclick="openModal(${i})">Solicitar orçamento</button>
+        <p class="serv-desc">${groupedServices.map((service) => service.desc).join(" ")}</p>
+        <ul class="serv-bullets">${groupedServices.map((service) => `<li>${service.name}</li>`).join("")}</ul>
+        <button class="btn-ver" type="button" onclick="openGroupModal(${i})">Solicitar orçamento</button>
       </div>
     `;
           g.appendChild(c);
         });
+
+        window.serviceGroups = serviceGroups;
       }
 
       function toggleService(button) {
@@ -3600,6 +3654,31 @@
         const isOpen = card.classList.toggle("open");
         button.setAttribute("aria-expanded", String(isOpen));
         details.hidden = !isOpen;
+      }
+
+      function openGroupModal(groupIndex) {
+        const group = window.serviceGroups[groupIndex];
+        const groupedServices = group.indexes.map((index) => services[index]);
+        document.getElementById("m-icon").textContent = group.icon;
+        document.getElementById("m-name").textContent = group.name;
+        document.getElementById("m-tagline").textContent = group.tagline;
+        document.getElementById("m-desc").textContent = groupedServices
+          .map((service) => service.fullDesc)
+          .join(" ");
+        document.getElementById("m-included").innerHTML = groupedServices
+          .flatMap((service) =>
+            service.included.map((item) => `<li>${item}</li>`),
+          )
+          .join("");
+        document.getElementById("m-meta").innerHTML =
+          `<span class="modal-tag mt-prazo">⏱ Consulte o prazo</span><span class="modal-tag mt-tipo">${groupedServices.map((service) => service.tipo).join(" · ")}</span>`;
+        const msg = encodeURIComponent(
+          `Olá! Tenho interesse em ${group.name}. Pode me dar mais informações?`,
+        );
+        document.getElementById("m-cta").href =
+          `https://wa.me/${WA}?text=${msg}`;
+        document.getElementById("overlay").classList.add("open");
+        document.body.style.overflow = "hidden";
       }
 
       function openModal(i) {
