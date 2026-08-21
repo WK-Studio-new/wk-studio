@@ -191,6 +191,13 @@
     });
   }
 
+  function placeCalculatorAfterSolutions() {
+    const solutions = document.getElementById("servicos");
+    const calculator = document.getElementById("calculadora");
+    if (!solutions || !calculator) return;
+    solutions.parentNode.insertBefore(calculator, solutions.nextElementSibling);
+  }
+
   /* ---- COUNTER ANIMATION nos stats ---- */
   function animateCounters() {
     const statNums = document.querySelectorAll(".stat-num");
@@ -233,6 +240,7 @@
   /* ---- INIT ---- */
   function init() {
     assignWhatsapp();
+    placeCalculatorAfterSolutions();
     handleNavbar();
     handleAnchorClicks();
     setupReveal();
