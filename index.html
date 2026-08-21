@@ -637,7 +637,7 @@
 
       .serv-card {
         background: var(--bg);
-        padding: 36px 32px;
+        padding: 24px 22px;
         position: relative;
         cursor: pointer;
         transition: background 0.3s;
@@ -666,52 +666,52 @@
       }
 
       .serv-num {
-        font-size: 10px;
+        font-size: 9px;
         letter-spacing: 0.18em;
         text-transform: uppercase;
         color: var(--dim);
-        margin-bottom: 20px;
+        margin-bottom: 12px;
       }
 
       .serv-icon {
-        font-size: 20px;
-        margin-bottom: 16px;
+        font-size: 18px;
+        margin-bottom: 10px;
       }
 
       .serv-name {
         font-family: var(--ff-title);
-        font-size: 20px;
+        font-size: 18px;
         font-weight: 500;
         color: var(--white);
-        margin-bottom: 6px;
+        margin-bottom: 4px;
       }
 
       .serv-tag {
-        font-size: 11px;
+        font-size: 10px;
         font-weight: 300;
         color: var(--gold);
-        margin-bottom: 14px;
+        margin-bottom: 10px;
         letter-spacing: 0.04em;
       }
 
       .serv-desc {
-        font-size: 13px;
+        font-size: 12px;
         font-weight: 300;
         color: var(--muted);
-        line-height: 1.75;
-        margin-bottom: 20px;
+        line-height: 1.6;
+        margin-bottom: 14px;
       }
 
       .serv-bullets {
         list-style: none;
         display: flex;
         flex-direction: column;
-        gap: 6px;
-        margin-bottom: 24px;
+        gap: 4px;
+        margin-bottom: 16px;
       }
 
       .serv-bullets li {
-        font-size: 12px;
+        font-size: 11px;
         font-weight: 300;
         color: rgba(245, 240, 232, 0.5);
         display: flex;
@@ -733,7 +733,7 @@
         display: inline-flex;
         align-items: center;
         gap: 8px;
-        font-size: 11px;
+        font-size: 10px;
         font-weight: 400;
         letter-spacing: 0.12em;
         text-transform: uppercase;
@@ -2395,11 +2395,6 @@
           crescer no digital, em um só lugar.
         </p>
         <div class="serv-grid reveal" id="serv-grid"></div>
-        <p class="serv-support reveal">
-          <strong>Também disponíveis:</strong> edição de imagens, plataformas de
-          gerenciamento, notificações via WhatsApp, produção de conteúdo e
-          cardápios digitais.
-        </p>
       </div>
     </section>
 
@@ -3533,20 +3528,10 @@
 
       function buildCards() {
         const g = document.getElementById("serv-grid");
-        const featuredServices = [
-          "Sites",
-          "Google Meu Negócio",
-          "Identidade Visual",
-          "WhatsApp Business",
-          "Instagram Profissional",
-          "Agendamento Online",
-        ];
-        services
-          .filter((s) => featuredServices.includes(s.name))
-          .forEach((s, i) => {
-            const c = document.createElement("div");
-            c.className = "serv-card";
-            c.innerHTML = `
+        services.forEach((s, i) => {
+          const c = document.createElement("div");
+          c.className = "serv-card";
+          c.innerHTML = `
       <div class="serv-num">0${i + 1}</div>
       <div class="serv-icon">${s.icon}</div>
       <div class="serv-name">${s.name}</div>
@@ -3555,8 +3540,8 @@
       <ul class="serv-bullets">${s.bullets.map((b) => `<li>${b}</li>`).join("")}</ul>
       <button class="btn-ver" onclick="openModal(${i})">Solicitar orçamento</button>
     `;
-            g.appendChild(c);
-          });
+          g.appendChild(c);
+        });
       }
 
       function openModal(i) {
