@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contato — WK Studio</title>
+<meta name="description" content="Tem alguma coisa que você quer construir? Fale com a WK Studio.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,500&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap">
+    <a href="index.html" class="logo">WK Studio</a>
+    <nav class="nav-links">
+      <a href="studio.html">Studio</a>
+      <a href="work.html">Work</a>
+      <a href="capabilities.html">Capabilities</a>
+      <a href="lab.html">Lab</a>
+      <a href="insights.html">Insights</a>
+      <a href="contact.html" class="btn btn-primary">Iniciar projeto</a>
+    </nav>
+    <button class="menu-toggle" aria-label="Abrir menu">Menu</button>
+  </div>
+</header>
+
+<main>
+
+  <section class="page-hero">
+    <div class="wrap">
+      <p class="eyebrow">Contato</p>
+      <h1>Tem alguma coisa que você quer construir?</h1>
+      <p class="lede">Conta um pouco sobre o que você precisa. Não existe pergunta pequena demais para começar essa conversa.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap" style="max-width:720px;">
+
+      <form id="contact-form">
+        <div class="intent-grid" role="radiogroup" aria-label="O que você está buscando">
+          <label class="intent-card">
+            <input type="radio" name="intent" value="Quero contratar um serviço" checked>
+            <span>Quero contratar um serviço</span>
+          </label>
+          <label class="intent-card">
+            <input type="radio" name="intent" value="Tenho uma ideia">
+            <span>Tenho uma ideia</span>
+          </label>
+          <label class="intent-card">
+            <input type="radio" name="intent" value="Quero conversar">
+            <span>Quero conversar</span>
+          </label>
+          <label class="intent-card">
+            <input type="radio" name="intent" value="Quero conhecer melhor a WK Studio">
+            <span>Quero conhecer melhor a WK Studio</span>
+          </label>
+        </div>
+
+        <div class="form-field">
+          <label for="name">Nome</label>
+          <input type="text" id="name" name="name" required>
+        </div>
+        <div class="form-field">
+          <label for="email">E-mail</label>
+          <input type="email" id="email" name="email" required>
+        </div>
+        <div class="form-field">
+          <label for="message">Conte um pouco sobre o que você precisa</label>
+          <textarea id="message" name="message" rows="5" required></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Enviar mensagem</button>
+      </form>
+
+      <div class="contact-direct">
+        <div>
+          <h4>E-mail</h4>
+          <a href="mailto:contato@wkstudio.com.br">contato@wkstudio.com.br</a>
+        </div>
+        <div>
+          <h4>WhatsApp</h4>
+          <a href="#">Chamar no WhatsApp</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-top">
+      <div>
+        <p class="logo" style="margin-bottom:14px;">WK Studio</p>
+        <p style="color:var(--ink-soft); max-width:32ch; font-size:0.95rem;">Um digital studio independente. Sites, ferramentas e sistemas — um problema de cada vez.</p>
+      </div>
+      <div class="footer-nav">
+        <div class="footer-col">
+          <h4>Studio</h4>
+          <a href="studio.html">O Studio</a>
+          <a href="work.html">Work</a>
+          <a href="lab.html">Lab</a>
+        </div>
+        <div class="footer-col">
+          <h4>Negócio</h4>
+          <a href="capabilities.html">Capabilities</a>
+          <a href="insights.html">Insights</a>
+          <a href="contact.html">Contato</a>
+        </div>
+        <div class="footer-col">
+          <h4>Contato</h4>
+          <span>contato@wkstudio.com.br</span>
+          <a href="#">WhatsApp</a>
+        </div>
+      </div>
+    </div>
+    <div class="rule"></div>
+    <div class="footer-bottom" style="margin-top:24px;">
+      <span>© 2026 WK Studio</span>
+      <span>Feito à mão, sem template</span>
+    </div>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
